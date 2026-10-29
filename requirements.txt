@@ -1,0 +1,27 @@
+# extra index url is needed for PyTorch wheels, not parsed by setuptools if you want to use GPU
+# install with: pip install torch==1.12.1+cu113 torchvision==0.13.1+cu113 torchaudio==0.12.1 \
+#    --extra-index-url https://download.pytorch.org/whl/cu113 
+
+torch==1.12.1
+torchvision==0.13.1
+torchaudio==0.12.1
+h5py>=3.11.0
+hydra-core>=1.3.2
+imageio>=2.37.0
+matplotlib>=3.9.2
+natsort>=7.1.1
+nibabel>=5.3.2
+numpy==1.26.4
+opencv-python==4.11.0.86
+openpyxl>=3.1.5
+pandas>=2.2.3
+pillow==9.5.0
+scipy>=1.13.1
+scikit-image==0.22.0
+scikit-learn>=1.6.1
+tensorboard>=2.17.0
+thop>=0.1.1
+torch==1.12.1
+torchvision==0.13.1
+torchaudio==0.12.1
+tqdm>=4.66.5

@@ -1,0 +1,42 @@
+hydra:
+  run:
+    dir: /otazolab_ess/Schellenberg/ProcessedData/hydra_outputs/${hparams.experiment_name}/${now:%Y-%m-%d}/${now:%H-%M-%S} # path to where configs shall be saved
+
+
+hparams:
+    Ninputchannels: 16  # 2*8coils for SELFIE, 8coils*time_frames for Movienet 
+    Noutputchannels: 2 # 2 for SLEIE, time_frames for Movienet 
+    timeframes: 60
+    img_size: 256
+    coils: 8
+    modelname: "TwoDPlusTimeUnet_larger" #"TwoDPlusTimeUnet_larger" or "Unet3D" or "Movienet"
+    batch_size: 1
+    padder: 5 # for temporal augmentation, padding along time dimension
+    start_padding: 3 # for temporal augmentation, selection of time frame along padded time dimension
+    n_epochs: 2000
+    experiment_name: "SELFIE_GYN_training1"
+    experiment_name_load: "None"
+    load_model: False
+    fold: None
+    scheduler_start_epoch: 5
+    cuda: True # or "parallel"
+    node: "cuda:0"
+    nodes: [0, 1] #2, 3]
+    learning_rate: 0.001
+    do_transform: False # temporal augmentation
+    do_aug: False # conventional image augmentation
+    WD: 0.0
+    patience: 10
+    logging_epoch_freq: 10
+    complex: True 
+    GRASP_complex: True
+    julia_reco: True
+    L2_method: Average
+    L1_lambda: 0 # GRASP loss - set to 0 during inference; must be 0 for SELFIE and 1 for Movienet
+    L2_lambda: 1 # anatomical loss - set to 0 during inference, was 1 for SELFIE; must be 0 for Movienet
+    L3_lambda: 1 # temporal loss - set to 0 during inference, was 1 for SELFIE; must be 0 for Movienet
+    TV_lambda: 0.4 # TV loss - set to 0 during inference, was 0.4 for DCE experiment and 1 for motion-resolved experiment; must be 0 for Movienet
+
+    data_dir: "/otazolab_ess/Schellenberg/ProcessedData/ProcessedData_example/" # path to DATA_DIR_EXP
+    meta_dir: "/otazolab_ess/Schellenberg/ProcessedData/Data_example/Meta_infos_example.xlsx/" # path to an *.xslx file, that contains meta information. An example can be found under the zenodo link
+    results_dir: "/otazolab_ess/Schellenberg/ProcessedData/" # path to where the outputs shall be saved
